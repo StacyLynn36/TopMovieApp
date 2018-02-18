@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MovieTitle>
+
+  <MovieTitle>
+
+    <Id>1</Id>
+    <Title>Star Wars The Last Jedi</Title>
+    <TotalGross>$531,511,829</TotalGross>
+    <MovieTrailerLink>https://youtu.be/Q0CbN8sfihY</MovieTrailerLink>
+
+    <Id>2</Id>
+    <Title>Beauty and the Beast</Title>
+    <TotalGross>$504,014,165</TotalGross>
+    <MovieTrailerLink>https://youtu.be/OvW_L8sTu5E</MovieTrailerLink>
+
+    <Id>3</Id>
+    <Title>Wonder Woman</Title>
+    <TotalGross>$412,563,408</TotalGross>
+    <MovieTrailerLink>https://youtu.be/qeZ8X5FKl78</MovieTrailerLink>
+
+    <Id>4</Id>
+    <Title>Guardians of the Galaxy Vol.2</Title>
+    <TotalGross>$389,813,101</TotalGross>
+    <MovieTrailerLink>https://youtu.be/duGqrYw4usE</MovieTrailerLink>
+
+    <Id>5</Id>
+    <Title>Spider-Man Homecoming</Title>
+    <TotalGross>$334,201,140</TotalGross>
+    <MovieTrailerLink>https://youtu.be/n9DwoQ7HWvI</MovieTrailerLink>
+
+    <Id>6</Id>
+    <Title>IT</Title>
+    <TotalGross>$327,481,748</TotalGross>
+    <MovieTrailerLink>https://youtu.be/7no56Zw1e20</MovieTrailerLink>
+
+    <Id>7</Id>
+    <Title>Thor Ragnarok</Title>
+    <TotalGross>$311,500,126</TotalGross>
+    <MovieTrailerLink>https://youtu.be/F7ayGFHGqeQ</MovieTrailerLink>
+
+    <Id>8</Id>
+    <Title>Despicable Me 3</Title>
+    <TotalGross>$264,624,300</TotalGross>
+    <MovieTrailerLink>https://youtu.be/6DBi41reeF0</MovieTrailerLink>
+
+    <Id>9</Id>
+    <Title>Logan</Title>
+    <TotalGross>$226,277,068</TotalGross>
+    <MovieTrailerLink>https://youtu.be/gbug3zTm3Ws</MovieTrailerLink>
+
+    <Id>10</Id>
+    <Title>Justice League</Title>
+    <TotalGross>$225,913,169</TotalGross>
+    <MovieTrailerLink>https://youtu.be/3cxixDgHUYw</MovieTrailerLink>
+
+    <Id>11</Id>
+    <Title>The Fate of the Furious</Title>
+    <TotalGross>$226,008,385</TotalGross>
+    <MovieTrailerLink>https://youtu.be/5uaJufU1JTs</MovieTrailerLink>
+
+    <Id>12</Id>
+    <Title>Dunkirk</Title>
+    <TotalGross>$188,045,546</TotalGross>
+    <MovieTrailerLink>https://youtu.be/F-eMt3SrfFU</MovieTrailerLink>
+
+    <Id>13</Id>
+    <Title>Jumanji Welcome to the Jungle</Title>
+    <TotalGross>$185,224,946</TotalGross>
+    <MovieTrailerLink>https://youtu.be/2QKg5SZ_35I</MovieTrailerLink>
+
+    <Id>14</Id>
+    <Title>Coco</Title>
+    <TotalGross>$182,455,513</TotalGross>
+    <MovieTrailerLink>https://youtu.be/jjudmcSxzpc</MovieTrailerLink>
+
+    <Id>15</Id>
+    <Title>The LEGO Batman Movie</Title>
+    <TotalGross>$175,750,384</TotalGross>
+    <MovieTrailerLink>https://youtu.be/LqrQKZlCcjo</MovieTrailerLink>
+
+
+  </MovieTitle>
+  
+</MovieTitle>
