@@ -16,6 +16,7 @@ namespace TopMovieApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Application["dataFilePath"] = HttpContext.Current.Server.MapPath("~/ App_Data / TopMovieData.xml");
         }
     }
 }

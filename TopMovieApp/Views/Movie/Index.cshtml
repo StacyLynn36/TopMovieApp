@@ -1,0 +1,59 @@
+﻿Page @(pagedList.PageCount <pagedList.PageNumber ? 0 : pagedList.PagNumber) of @pagedList.PageCount
+
+@Html.PagedListPager(pagedList, Page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+@model IEnumerable<TopMovieApp.Models.Movie>
+
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    //
+    //cast the model as a PagedList to access pagination properties
+    //
+    var pagedList = (IPagedList)Model;
+}
+
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalGross)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieTrailerLink)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalGross)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieTrailerLink)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
