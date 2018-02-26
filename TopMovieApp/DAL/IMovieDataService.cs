@@ -5,9 +5,8 @@ using System.Web;
 using TopMovieApp.Models;
 
 namespace TopMovieApp.DAL
-{
-    public class IMovieDataService
-    {
+{   
+    
         /// <summary>
         /// data service list to read and write file based on the movie class
         /// </summary>
@@ -17,5 +16,5 @@ namespace TopMovieApp.DAL
             List<Movie> Read();
             void Write(List<Movie> Movies);
         }
-    }
+    
 }

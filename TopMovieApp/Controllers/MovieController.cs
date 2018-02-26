@@ -14,6 +14,7 @@ namespace TopMovieApp.Controllers
         // GET: Movie
         public ActionResult Index(string sortOrder, int? page)
         {
+          
             //
             //set parameters and paginate the movies lis
             //
