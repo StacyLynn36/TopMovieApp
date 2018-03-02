@@ -12,6 +12,6 @@ namespace TopMovieApp.Models
         public string Title { get; set; }
 
         public string TotalGross { get; set; }
-        public int Director { get; set; }
+        public string Director { get; set; }
     }
 }

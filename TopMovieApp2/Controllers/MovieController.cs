@@ -39,11 +39,11 @@ namespace TopMovieApp.Controllers
                 case "TotalGross":
                     movies = movies.OrderBy(movie => movie.TotalGross);
                     break;
-                case "Director":
+                case "MovieTrailerLink":
                     movies = movies.OrderBy(movie => movie.Director);
                     break;
                 default:
-                    movies = movies.OrderBy(movie => movie.Title);
+
                     break;
             }
 
