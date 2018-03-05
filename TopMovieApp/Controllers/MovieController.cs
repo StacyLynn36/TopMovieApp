@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TopMovieApp.Models;
 using TopMovieApp.DAL;
+using PagedList;
 
 
 
@@ -14,12 +15,18 @@ namespace TopMovieApp.Controllers
         public class MovieController : Controller
     {
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, int? page)
         {
             //
             //instantiate a repository
             //
             MovieRepository movieRepository = new MovieRepository();
+
+            //
+            //create a distinct list of total gross for the total gross filter
+            //
+
+            ViewBag.totalGross = ListOfTotalGross();
 
             //
             //return the data context as an enumerable
@@ -47,11 +54,18 @@ namespace TopMovieApp.Controllers
                     break;
             }
 
+            //
+            //set parameters and paginate the total gross list
+            //
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
+            movies = movies.ToPagedList(pageNumber, pageSize);
+
             return View(movies);
          
         }
         [HttpPost]
-        public ActionResult Index(string searchCriteria, string totalGrossFilter)
+        public ActionResult Index(string searchCriteria, string totalGrossFilter, int? page)
         {
             //
             //instantiate a repository
@@ -74,13 +88,42 @@ namespace TopMovieApp.Controllers
             {
                 movies = movies.Where(movie => movie.Title.ToUpper().Contains(searchCriteria.ToUpper()));
             }
+
+            //
+            //if posted with a filter by total gross
+            //
+            if (totalGrossFilter != "" || totalGrossFilter == null)
+            {
+                movies = movies.Where(movie => movie.TotalGross == totalGrossFilter);
+            }
+
+            //
+            //set parameters and paginate the total gross list
+            //
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
+            movies = movies.ToPagedList(pageNumber, pageSize);
+
             return View(movies);
         }
 
         // GET: Movie/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            //
+            //instantiate a repository
+            //
+            MovieRepository movieRepository = new MovieRepository();
+            Movie movie = new Movie();
+
+            //
+            //get a movie that has the matching id
+            //
+            using (movieRepository)
+            {
+                movie = movieRepository.SelectOne(id);
+            }
+            return View(movie);
         }
 
         // GET: Movie/Create
@@ -91,11 +134,16 @@ namespace TopMovieApp.Controllers
 
         // POST: Movie/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Movie movie)
         {
             try
             {
-                // TODO: Add insert logic here
+                MovieRepository movieRepository = new MovieRepository();
+
+                using (movieRepository)
+                {
+                    movieRepository.Insert(movie);
+                }
 
                 return RedirectToAction("Index");
             }
@@ -105,19 +153,31 @@ namespace TopMovieApp.Controllers
             }
         }
 
-        // GET: Movie/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            MovieRepository movieRepository = new MovieRepository();
+            Movie movie = new Movie();
+
+            using (movieRepository)
+            {
+                movie = movieRepository.SelectOne(id);
+            }
+            return View(movie);
         }
 
-        // POST: Movie/Edit/5
+        
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Movie movie)
         {
             try
             {
-                // TODO: Add update logic here
+                MovieRepository movieRepository = new MovieRepository();
+
+                using (movieRepository)
+                {
+                    movieRepository.Update(movie);
+                }
 
                 return RedirectToAction("Index");
             }
@@ -127,19 +187,32 @@ namespace TopMovieApp.Controllers
             }
         }
 
-        // GET: Movie/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            MovieRepository movieRepository = new MovieRepository();
+            Movie movie = new Movie();
+
+            using (movieRepository)
+            {
+                movie = movieRepository.SelectOne(id);
+            }
+
+            return View(movie);
         }
 
-        // POST: Movie/Delete/5
+        
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Movie movie)
         {
             try
             {
-                // TODO: Add delete logic here
+                MovieRepository movieRepository = new MovieRepository();
+
+                using (movieRepository)
+                {
+                    movieRepository.Delete(id);
+                }
 
                 return RedirectToAction("Index");
             }
@@ -147,6 +220,30 @@ namespace TopMovieApp.Controllers
             {
                 return View();
             }
+        }        
+        [NonAction]
+        private IEnumerable<string> ListOfTotalGross()
+        {
+            //
+            //instantiate a repository
+            //
+            MovieRepository movieRepository = new MovieRepository();
+
+            //
+            //return the data context as an enumerable
+            //
+            IEnumerable<Movie> movies;
+            using (movieRepository)
+            {
+                movies = movieRepository.SelectAll() as IList<Movie>;
+            }
+
+            //
+            //get a distinct list of total gross
+            //
+            var totalGross = movies.Select(movie => movie.TotalGross).Distinct().OrderBy(x => x);
+
+            return totalGross;
         }
     }
 }

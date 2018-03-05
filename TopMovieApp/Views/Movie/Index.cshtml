@@ -1,67 +1,83 @@
 ﻿
 @model IEnumerable<TopMovieApp.Models.Movie>
 
+@using PagedList;
+@using PagedList.Mvc;
 
 
 @{
     ViewBag.Title = "Index";
-    
-}
+
+    //
+    //cast the model as a PagedList to access pagination properties
+    //
+    var pagedList = (IPagedList)Model;
+
+     Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
+
+    @Html.PagedListPager(pagedList, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag, CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+    }
 
 
-<h2>Index</h2>
+    <h2>Index</h2>
 
-@using (Html.BeginForm())
-{
-    <div id="FilterSearch" class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        <div id="FilterSearch" class="form-horizontal">
 
-        <div class="form-group">
-            @Html.Label("Search by Title", htmlAttributes: new { @class = "control-label col-md-2"})
-            @Html.TextBox("searchCriteria", null, new { @class = "form-control"})
+            <div class="form-group">
+                @Html.Label("Search by Title", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.TextBox("searchCriteria", null, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Filter by Total Gross", htmlAttributes: new { @class = "control-lable col-md-2" })
+                @Html.DropDownList("totalGrossFilter",
+                                  new SelectList(ViewBag.TotalGross),
+                                  "All Total Gross",
+                                  new { @class = "form-control" })
+            </div>
+
         </div>
+    }
 
-        <div class="form-group">
-            <input type="submit" value="Find Top Grossing Movies" class="btn col-md-offset-2"/>
-            <input type="button" value="Resent Top Grossing Movie List" onclick="location.href = '@Url.Action("Index", "Movie")'" class="btn col-md-2 col-md-offset-2"/>
-        </div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Title).ToHtmlString(), "Index", new { sortOrder = "Title" })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.TotalGross).ToHtmlString(), "Index", new { sortOrder = "Total Gross" })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Director).ToHtmlString(), "Index", new { sortOrder = "Director" })
+            </th>
+            <th></th>
+        </tr>
 
-    </div>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalGross)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Director)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink(@Html.DisplayNameFor(model => model.Title).ToHtmlString(), "Index", new {sortOrder = "Title"})
-        </th>
-        <th>
-            @Html.ActionLink(@Html.DisplayNameFor(model => model.TotalGross).ToHtmlString(), "Index", new {sortOrder = "Total Gross"})
-        </th>
-        <th>
-            @Html.ActionLink(@Html.DisplayNameFor(model => model.Director).ToHtmlString(), "Index", new {sortOrder = "Director"})
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalGross)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Director)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    </table>
