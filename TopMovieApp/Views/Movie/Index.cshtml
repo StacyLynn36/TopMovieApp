@@ -1,24 +1,27 @@
-﻿
-@model IEnumerable<TopMovieApp.Models.Movie>
-
-@using PagedList;
-@using PagedList.Mvc;
+﻿@model IEnumerable<TopMovieApp.Models.Movie>
 
 
 @{
     ViewBag.Title = "Index";
+}
 
-    //
-    //cast the model as a PagedList to access pagination properties
-    //
-    var pagedList = (IPagedList)Model;
+@using PagedList;
+@using PagedList.Mvc;
 
-     Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
+@{ 
+    @ViewBag.Title = "Index";
+
+        //
+        //cast the model as a PagedList to access pagination properties
+        //
+        var pagedList = (IPagedList)Model;
+
+  }
+    Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
 
     @Html.PagedListPager(pagedList, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag, CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
-    }
 
 
     <h2>Index</h2>
@@ -33,11 +36,16 @@
             </div>
 
             <div class="form-group">
+                <input type="submit" value="Find Top Movies" class="btn col-md-offset-2"/>
+                <input type="button" value="Reset Topt Movie List" onclick="location.href'@Url.Action("index","Movie")'" class="btn-md-2 col-md-ofsett-2"/>
+            </div>
+
+            <div class="form-group">
                 @Html.Label("Filter by Total Gross", htmlAttributes: new { @class = "control-lable col-md-2" })
                 @Html.DropDownList("totalGrossFilter",
-                                  new SelectList(ViewBag.TotalGross),
-                                  "All Total Gross",
-                                  new { @class = "form-control" })
+                                       new SelectList(ViewBag.TotalGross),
+                                       "All Total Gross",
+                                       new { @class = "form-control" })
             </div>
 
         </div>
@@ -61,23 +69,28 @@
         </tr>
 
         @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalGross)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Director)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalGross)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director)
+            </td>
 
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>*@
+        </tr>      
+}
     </table>
+    <div>
+        <input type="button" value="Details" class="btn btn-default" onclick="location.href='@Url.Action("Details", "Movie", new { id = item.Id })'" />
+        <input type="button" value="Details" class="btn btn-default" onclick="location.href='@Url.Action("Edit", "Movie", new { id = item.Id })'" />
+        <input type="button" value="Details" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Movie", new { id = item.Id })'" />
+    </div>

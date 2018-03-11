@@ -163,11 +163,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\TopMovieData.xml" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.min_org.css" />
+    <Content Include="App_Data\TopMovieData.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\bootstrap_org.css" />
+    <Content Include="Content\bootstrap.min_org.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -178,6 +178,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\TopMovieApp20180306024243 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\TopMovieApp20180311071743 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -1,18 +1,16 @@
-﻿using System;
+﻿using PagedList;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using TopMovieApp.Models;
 using TopMovieApp.DAL;
-using PagedList;
+using TopMovieApp.Models;
 
 
 
 
 namespace TopMovieApp.Controllers
 {
-        public class MovieController : Controller
+    public class MovieController : Controller
     {
         [HttpGet]
         public ActionResult Index(string sortOrder, int? page)
@@ -57,7 +55,7 @@ namespace TopMovieApp.Controllers
             //
             //set parameters and paginate the total gross list
             //
-            int pageSize = 50;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             movies = movies.ToPagedList(pageNumber, pageSize);
 
@@ -100,7 +98,7 @@ namespace TopMovieApp.Controllers
             //
             //set parameters and paginate the total gross list
             //
-            int pageSize = 50;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             movies = movies.ToPagedList(pageNumber, pageSize);
 

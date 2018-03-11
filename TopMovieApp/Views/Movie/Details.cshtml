@@ -9,9 +9,19 @@
 <div>
     <h4>Movies</h4>
     <hr />
-    <dl class="dl-horizontal">
-    </dl>
+    <dl class="dl-horizontal"></dl>
 </div>
+
+<table class="table">
+
+
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.TotalGross)</th>
+        <th>@Html.DisplayNameFor(model => model.Director)</th>
+    </tr>
+</table>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
@@ -19,20 +29,20 @@
 
 @foreach (var item in Model)
 {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Title)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TotalGross)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Director)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
-        @Html.ActionLink("Details", "Details", new { id = item.Id })|
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
-    </td>
-</tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalGross)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Director)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
+            @Html.ActionLink("Details", "Details", new { id = item.Id })|
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
+        </td>
+    </tr>
 }
